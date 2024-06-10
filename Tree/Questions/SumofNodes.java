@@ -1,7 +1,6 @@
-package Tree;
+package Tree.Questions;
 
-//preorder - because first root will come then left and right.0(n)
-public class PreorderTree {
+public class SumofNodes {
     static class Node{
         int data;
         Node left;
@@ -13,7 +12,7 @@ public class PreorderTree {
             this.right = null;
         }
     }
-    static class BinaryTree{
+    public static class BinaryTree{
         static int idx=-1;
         public static Node buildTree(int nodes[]){
             idx++;
@@ -28,24 +27,25 @@ public class PreorderTree {
             return newNode;
         }
     }
-    //preorder traversal
-    //tc-0(n)
-    public static void preorder(Node root){
+    //we always go first left subtree count and then right subtree count 
+    //for x left tree and for right y so x+y+1 1 will be root
+    public static int sumnodes(Node root){
         if(root==null){
-            return ;
+            return 0;
         }
-        System.out.println(root.data+" ");
-        preorder(root.left);
-        preorder(root.right);
+        int leftsum = sumnodes(root.left);
+        int rightsum = sumnodes(root.right);
+
+        return leftsum+rightsum+root.data;
     }
+
+   
 
     public static void main(String args[]){
         int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
-        preorder(root);
+        System.out.println(sumnodes(root));
         
     }
-
-    
 }

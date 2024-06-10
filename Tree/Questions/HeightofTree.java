@@ -1,7 +1,7 @@
-package Tree;
+package Tree.Questions;
 
-//preorder - because first root will come then left and right.0(n)
-public class PreorderTree {
+//if the tree level is 3 then the height of the tree is 3
+public class HeightofTree {
     static class Node{
         int data;
         Node left;
@@ -13,7 +13,7 @@ public class PreorderTree {
             this.right = null;
         }
     }
-    static class BinaryTree{
+    public static class BinaryTree{
         static int idx=-1;
         public static Node buildTree(int nodes[]){
             idx++;
@@ -28,24 +28,26 @@ public class PreorderTree {
             return newNode;
         }
     }
-    //preorder traversal
-    //tc-0(n)
-    public static void preorder(Node root){
+    public static int height(Node root){
         if(root==null){
-            return ;
+            return 0;
         }
-        System.out.println(root.data+" ");
-        preorder(root.left);
-        preorder(root.right);
+        int leftHeight = height(root.left);
+        int rightHeight  = height(root.right);
+
+        int myHeight = Math.max(leftHeight,rightHeight)+1;
+
+        return myHeight;
     }
+    
+
+   
 
     public static void main(String args[]){
         int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
-        preorder(root);
+        System.out.println(height(root));
         
     }
-
-    
 }

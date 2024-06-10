@@ -1,7 +1,10 @@
 package Tree;
 
-//preorder - because first root will come then left and right.0(n)
-public class PreorderTree {
+//postOrder Traversal
+//left subtree
+//Right subtree
+//Root
+public class PostorderTraversal {
     static class Node{
         int data;
         Node left;
@@ -13,7 +16,7 @@ public class PreorderTree {
             this.right = null;
         }
     }
-    static class BinaryTree{
+    public static class BinaryTree{
         static int idx=-1;
         public static Node buildTree(int nodes[]){
             idx++;
@@ -28,24 +31,22 @@ public class PreorderTree {
             return newNode;
         }
     }
-    //preorder traversal
-    //tc-0(n)
-    public static void preorder(Node root){
+    public static void postorder(Node root){
         if(root==null){
-            return ;
+            return;
         }
+        postorder(root.left);
+        postorder(root.right);
         System.out.println(root.data+" ");
-        preorder(root.left);
-        preorder(root.right);
     }
+
+   
 
     public static void main(String args[]){
         int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
-        preorder(root);
+        postorder(root);
         
     }
-
-    
 }
